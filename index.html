@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> artestix </title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a; /* Dark Grey */
+            color: #e0e0e0; /* Light Grey for text */
+        }
+        .violet-accent {
+            color: #8a2be2; /* Violet */
+        }
+        .bg-violet-accent {
+            background-color: #8a2be2; /* Violet */
+        }
+        .border-violet-accent {
+            border-color: #8a2be2; /* Violet */
+        }
+        .hover-violet-glow:hover {
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+            transform: translateY(-2px);
+            transition: all 0.3s ease-in-out;
+        }
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .slider-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider-image {
+            min-width: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+            line-height: 1;
+            border: none;
+            outline: none;
+        }
+        .slider-button.left {
+            left: 1rem;
+        }
+        .slider-button.right {
+            right: 1rem;
+        }
+        .slider-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .indicator-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #4a4a4a; /* Darker grey */
+            border-radius: 50%;
+            margin: 0 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .indicator-dot.active {
+            background-color: #8a2be2; /* Violet */
+        }
+        .profile-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #333333; /* Slightly lighter dark grey */
+            border: 3px solid #8a2be2; /* Violet border */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            overflow: hidden; /* Ensure image stays within circle */
+        }
+        .profile-line {
+            width: 70%;
+            height: 3px;
+            background-color: #8a2be2; /* Violet */
+            border-radius: 9999px; /* Full rounded corners */
+        }
+
+        /* Responsive adjustments for product showcase */
+        @media (min-width: 640px) { /* sm breakpoint */
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+
+    <!-- Header Section -->
+    <header class="w-full max-w-4xl bg-gray-800 p-6 rounded-xl shadow-lg border border-violet-accent mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-center violet-accent">SERENITY IN SOUNDS</h1>
+        <p class="text-center text-gray-400 mt-2 text-sm sm:text-base">Experience the soothing sounds of nature and white noise</p>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="w-full max-w-4xl flex flex-col items-center">
+
+        <!-- Sliding Images of Products for Showcasing -->
+        <section class="w-full bg-gray-800 p-6 rounded-xl shadow-lg border border-violet-accent mb-8">
+            <h2 class="text-2xl font-semibold text-center violet-accent mb-6">Our Soothing Creations</h2>
+            <div class="slider-container w-full max-w-3xl mx-auto">
+                <div class="slider-images" id="sliderImages">
+                    <img src="https://placehold.co/800x450/333333/8a2be2?text=Freshly+Baked+Bread" alt="Freshly Baked Bread" class="slider-image rounded-xl">
+                    <img src="https://placehold.co/800x450/333333/8a2be2?text=Google+Apps+Spread" alt="Google Apps Spread" class="slider-image rounded-xl">
+                    <img src="https://placehold.co/800x450/333333/8a2be2?text=ASMR+Experience" alt="ASMR Experience" class="slider-image rounded-xl">
+                </div>
+                <button class="slider-button left" onclick="moveSlider(-1)">&#10094;</button>
+                <button class="slider-button right" onclick="moveSlider(1)">&#10095;</button>
+            </div>
+            <div class="slider-indicators" id="sliderIndicators"></div>
+
+            <div class="mt-8 grid grid-cols-1 product-grid gap-6">
+                <!-- Product Card 1 -->
+                <div class="bg-gray-900 p-4 rounded-xl shadow-md border border-gray-700 hover-violet-glow">
+                    <img src="https://placehold.co/300x300/444444/9370DB?text=Artisan+Loaf" alt="Artisan Loaf" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold violet-accent mb-2">Artisan Sourdough</h3>
+                    <p class="text-gray-400 text-sm">Experience the crackle of a perfectly baked crust and the soft, airy interior.</p>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="bg-gray-900 p-4 rounded-xl shadow-md border border-gray-700 hover-violet-glow">
+                    <img src="https://placehold.co/300x300/444444/9370DB?text=Sweet+Spread" alt="Sweet Spread" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold violet-accent mb-2">Berry Bliss Spread</h3>
+                    <p class="text-gray-400 text-sm">A delightful blend of sweet berries, perfect for a soothing breakfast.</p>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="bg-gray-900 p-4 rounded-xl shadow-md border border-gray-700 hover-violet-glow">
+                    <img src="https://placehold.co/300x300/444444/9370DB?text=Savory+Spread" alt="Savory Spread" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold violet-accent mb-2">Herb Garden Spread</h3>
+                    <p class="text-gray-400 text-sm">Infused with fresh herbs, a savory companion to any bread.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section class="w-full max-w-4xl bg-gray-800 p-6 rounded-xl shadow-lg border border-violet-accent flex flex-col items-center justify-center">
+            <h2 class="text-2xl font-semibold text-center violet-accent mb-6">About Our ASMR Journey</h2>
+            <div class="profile-circle">
+                <img src="https://placehold.co/150x150/555555/FFFFFF?text=ASMR+Creator" alt="ASMR Creator Profile" class="w-full h-full object-cover rounded-full">
+            </div>
+            <p class="text-center text-gray-400 max-w-md mb-4">
+                Welcome to our space of tranquility. We create ASMR content focused on the simple joys of life,
+                from culinary delights to everyday soothing sounds. Our goal is to help you relax and find peace.
+            </p>
+            <div class="profile-line"></div>
+        </section>
+
+    </main>
+
+    <script>
+        const sliderImages = document.getElementById('sliderImages');
+        const sliderIndicators = document.getElementById('sliderIndicators');
+        const images = sliderImages.children;
+        let currentIndex = 0;
+
+        // Function to create indicator dots
+        function createIndicators() {
+            for (let i = 0; i < images.length; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('indicator-dot');
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                sliderIndicators.appendChild(dot);
+            }
+            updateIndicators();
+        }
+
+        // Function to update slider position and active indicator
+        function updateSlider() {
+            const offset = -currentIndex * 100;
+            sliderImages.style.transform = `translateX(${offset}%)`;
+            updateIndicators();
+        }
+
+        // Function to update active indicator dot
+        function updateIndicators() {
+            const dots = sliderIndicators.children;
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            if (dots[currentIndex]) {
+                dots[currentIndex].classList.add('active');
+            }
+        }
+
+        // Function to move slider left or right
+        function moveSlider(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            updateSlider();
+        }
+
+        // Initialize slider and indicators on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            createIndicators();
+            updateSlider(); // Ensure initial state is correct
+        });
+    </script>
+</body>
+</html>
